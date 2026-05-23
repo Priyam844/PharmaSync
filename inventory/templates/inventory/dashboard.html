@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <div class="card" style="border-left: 5px solid var(--secondary-color);">
+        <h3>Total Medicines</h3>
+        <p style="font-size: 2rem; margin: 0;">{{ total_medicines }}</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--warning-color);">
+        <h3>Inventory Value</h3>
+        <p style="font-size: 2rem; margin: 0;">₹{{ total_stock_value|floatformat:2 }}</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--primary-color);">
+        <h3>30-Day Sales</h3>
+        <p style="font-size: 2rem; margin: 0;">₹{{ recent_sales_total|floatformat:2 }}</p>
+    </div>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h3>Expiry Alerts</h3>
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <div style="background: #f8d7da; padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                <h4 style="color: #721c24; margin: 0;">Critical</h4>
+                <p style="font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0;">{{ critical_count }}</p>
+                <small>Expiring in < 30 days</small>
+            </div>
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                <h4 style="color: #856404; margin: 0;">Warning</h4>
+                <p style="font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0;">{{ warning_count }}</p>
+                <small>Expiring in < 90 days</small>
+            </div>
+        </div>
+        <a href="{% url 'expiry_report' %}" class="btn btn-primary" style="display: block; text-align: center;">View Full Report</a>
+    </div>
+
+    <div class="card">
+        <h3>Urgent Actions</h3>
+        {% if critical_batches %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Expiry</th>
+                    <th>Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for batch in critical_batches %}
+                <tr>
+                    <td>{{ batch.medicine.name }}</td>
+                    <td><span class="badge badge-critical">{{ batch.expiry_date }}</span></td>
+                    <td>{{ batch.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No critical expiry items. Good job!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

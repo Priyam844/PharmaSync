@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Expiry Report{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Medicine Expiry Report</h2>
+    <p>Monitoring all stock batches sorted by expiry date.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Batch #</th>
+                <th>Expiry Date</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Days Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for batch in batches %}
+            <tr>
+                <td><strong>{{ batch.medicine.name }}</strong></td>
+                <td>{{ batch.batch_number }}</td>
+                <td>{{ batch.expiry_date }}</td>
+                <td>{{ batch.quantity }}</td>
+                <td>
+                    {% if batch.expiry_status == 'Critical' %}
+                        <span class="badge badge-critical">Critical (<= 30d)</span>
+                    {% elif batch.expiry_status == 'Warning' %}
+                        <span class="badge badge-warning">Warning (<= 90d)</span>
+                    {% elif batch.expiry_status == 'Expired' %}
+                        <span class="badge badge-critical">EXPIRED</span>
+                    {% else %}
+                        <span class="badge badge-safe">Safe</span>
+                    {% endif %}
+                </td>
+                <td>{{ batch.days_to_expiry }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center;">No stock found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

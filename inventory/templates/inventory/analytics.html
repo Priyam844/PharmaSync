@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <div class="card">
+        <h2>Fast Moving Medicines</h2>
+        <p><small>Top 10 items by sales volume.</small></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Units Sold</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in fast_moving %}
+                <tr>
+                    <td><strong>{{ item.batch__medicine__name }}</strong></td>
+                    <td>{{ item.total_sold }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" style="text-align: center;">No sales data available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Dead Stock Detection</h2>
+        <p><small>Medicines with stock but no sales in the last 60 days.</small></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Current Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicine in dead_stock %}
+                <tr>
+                    <td><strong>{{ medicine.name }}</strong></td>
+                    <td>{{ medicine.total_qty|default:0 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" style="text-align: center;">No dead stock detected.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

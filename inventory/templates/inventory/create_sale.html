@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Billing{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: auto;">
+    <h2>Create New Sale (FIFO Billing)</h2>
+    <p><small>The system will automatically select the oldest non-expired batches first.</small></p>
+    <form method="POST">
+        {% csrf_token %}
+        <div style="margin-bottom: 1rem;">
+            <label>Medicine:</label><br>
+            <select name="medicine_id" required style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                <option value="">-- Select Medicine --</option>
+                {% for medicine in medicines %}
+                <option value="{{ medicine.id }}">{{ medicine.name }} (In Stock)</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+            <label>Quantity to Sell:</label><br>
+            <input type="number" name="quantity" required min="1" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 0.75rem;">Complete Sale & Update Stock</button>
+    </form>
+</div>
+{% endblock %}

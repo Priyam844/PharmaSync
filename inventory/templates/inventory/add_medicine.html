@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Medicine{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: auto;">
+    <h2>Add New Medicine</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div style="margin-bottom: 1rem;">
+            <label>Medicine Name:</label><br>
+            <input type="text" name="name" required style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label>Generic Name:</label><br>
+            <input type="text" name="generic_name" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label>Manufacturer:</label><br>
+            <input type="text" name="manufacturer" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label>Category:</label><br>
+            <input type="text" name="category" placeholder="e.g. Tablet, Syrup" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label>Description:</label><br>
+            <textarea name="description" rows="3" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Medicine</button>
+    </form>
+</div>
+{% endblock %}

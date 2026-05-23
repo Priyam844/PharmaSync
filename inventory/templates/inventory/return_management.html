@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Return Management{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Return Management</h2>
+    <p>Items eligible for return to distributors (90-180 days before expiry).</p>
+    
+    <h3>Eligible Batches</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Batch #</th>
+                <th>Expiry Date</th>
+                <th>Quantity</th>
+                <th>Days Left</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for batch in eligible_batches %}
+            <tr>
+                <td><strong>{{ batch.medicine.name }}</strong></td>
+                <td>{{ batch.batch_number }}</td>
+                <td>{{ batch.expiry_date }}</td>
+                <td>{{ batch.quantity }}</td>
+                <td>{{ batch.days_to_expiry }}</td>
+                <td>
+                    <button class="btn btn-primary" style="background-color: var(--warning-color);">Initiate Return</button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center;">No items currently eligible for return.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>Return History</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Medicine</th>
+                <th>Batch</th>
+                <th>Quantity</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in existing_returns %}
+            <tr>
+                <td>{{ record.return_date }}</td>
+                <td>{{ record.batch.medicine.name }}</td>
+                <td>{{ record.batch.batch_number }}</td>
+                <td>{{ record.quantity }}</td>
+                <td>{{ record.status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No return records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

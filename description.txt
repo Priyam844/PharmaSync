@@ -1,0 +1,291 @@
+Medicine Inventory & Pharmacy Management System Workflow
+1. System Start & Authentication
+
+
+System starts.
+
+
+User logs into the system or gains authorized system access.
+
+
+After login, the system asks:
+
+
+“Add New Medicine?”
+
+
+
+
+
+2. Medicine Entry Workflow
+2.1 Decision: Add New Medicine?
+
+
+If Yes:
+
+
+User proceeds to medicine entry process.
+
+
+
+
+If No:
+
+
+User proceeds directly to the main system dashboard.
+
+
+
+
+
+2.2 Choose Entry Method
+The system allows three methods for adding medicine data:
+Option 1: Manual Entry
+User manually enters medicine information.
+Option 2: OCR Scan
+
+
+OCR scans medicine packaging or document.
+
+
+System extracts medicine details automatically.
+
+
+Option 3: Barcode Scan
+
+
+Barcode is scanned.
+
+
+System extracts medicine information from barcode data.
+
+
+
+2.3 Extract Medicine Details
+After OCR or Barcode scanning, the system extracts medicine-related information.
+
+2.4 Enter Batch Information
+User verifies or enters:
+
+
+Batch details
+
+
+Batch number
+
+
+Expiry date
+
+
+Quantity
+
+
+MRP (Maximum Retail Price)
+
+
+
+2.5 Store Data
+
+
+System stores all medicine information in the database.
+
+
+User proceeds to the system dashboard.
+
+
+
+3. Main Dashboard Workflow
+After entering the dashboard, the system asks:
+3.1 Exit System?
+
+
+If Yes:
+
+
+System ends.
+
+
+
+
+If No:
+
+
+User selects an operation.
+
+
+
+
+
+4. Available Operations
+The dashboard provides multiple operational modules:
+
+
+Check Expiry
+
+
+Return Management
+
+
+View Analytics
+
+
+Billing
+
+
+
+5. Expiry Checking Workflow
+5.1 Fetch All Batches
+System retrieves all medicine batches from the database.
+
+5.2 Calculate Days to Expiry
+System calculates remaining days before expiry for each batch.
+
+5.3 Determine Expiry Status
+System classifies medicines into categories:
+Case 1: More than 90 Days Remaining
+
+
+Status: Safe
+
+
+Action:
+
+
+Mark Safe
+
+
+
+
+Case 2: Less than or Equal to 90 Days
+
+
+Status: Warning
+
+
+Actions:
+
+
+Mark Warning
+
+
+Show Alerts
+
+
+
+
+Case 3: Less than or Equal to 30 Days
+
+
+Status: Critical
+
+
+Action:
+
+
+Mark Critical
+
+
+
+
+
+6. Return Management Workflow
+6.1 Check Return Eligibility
+System checks whether medicine batches are eligible for return.
+
+6.2 Verify Return Window
+Decision:
+
+
+Within Return Window?
+
+
+If Yes:
+
+
+Add medicine to return list.
+
+
+Mark return status.
+
+
+Track credit note.
+
+
+Update inventory after return processing.
+
+
+If No:
+
+
+Return process stops.
+
+
+
+7. Analytics Workflow
+7.1 Collect Sales Data
+System gathers medicine sales records.
+
+7.2 Analyze Trends
+System analyzes:
+
+
+Sales patterns
+
+
+Demand behavior
+
+
+Inventory movement
+
+
+
+7.3 Identify Inventory Performance
+System identifies:
+
+
+Fast-moving items
+
+
+Slow-moving items
+
+
+
+7.4 Detect Dead Stock
+System detects medicines with little or no movement.
+
+7.5 Generate Dashboard Reports
+System displays analytical reports on the dashboard.
+
+8. Billing Workflow
+8.1 Select Medicine
+User selects medicine for billing.
+
+8.2 Fetch Available Batches
+System retrieves available batches of the selected medicine.
+
+8.3 Sort by Expiry (FIFO)
+System sorts batches using:
+
+
+FIFO (First In First Out)
+
+
+Prioritizes older/earlier expiry stock first
+
+
+
+8.4 Deduct Quantity
+System deducts sold quantity from the oldest eligible batch.
+
+8.5 Generate Bill
+System generates final customer bill/invoice.
+
+9. System End
+When user chooses to exit:
+
+
+System terminates session.
+
+
+Workflow ends.
+
