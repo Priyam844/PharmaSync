@@ -13,6 +13,7 @@ This project consists of a Django REST API backend and a React (Vite) frontend.
 1. Open a terminal in the root directory.
 2. Activate environment: `.\venv\Scripts\activate`
 3. Run: `python manage.py runserver 8000`
+4. run: 'python manage.py runserver 0.0.0.0:8000' for the whole network
 
 ---
 
@@ -20,6 +21,7 @@ This project consists of a Django REST API backend and a React (Vite) frontend.
 1. Open a second terminal.
 2. Run: `cd frontend`
 3. Run: `npm run dev` (Available at http://localhost:5173)
+4. Run: 'nmp run dev -- --host' for the whole local network
 
 ---
 

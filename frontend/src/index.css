@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
+
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,15 +17,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.dark {
+  color: #f9fafb;
+  background-color: #111827;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #111827;
 }
 
 /* Ensure all inputs have consistent text color */
 input, textarea, select {
   color: #1a1a1a !important;
+}
+
+.dark input, .dark textarea, .dark select {
+  color: #f9fafb !important;
+  background-color: #1f2937;
+  border-color: #374151;
 }
 
 @layer base {

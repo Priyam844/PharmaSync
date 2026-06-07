@@ -1,0 +1,448 @@
+GUIDELINES FOR B. TECH PROJECT REPORT PREPARATION
+
+Introduction
+This document is intended to provide a set of specific and uniform guidelines to the B. Tech students in the preparation of the project report. The content of the report, which is submitted to the University in partial fulfillment for the award of the degree of Bachelor of Technology, is very much important. It is also imperative that the report, to be acceptable by the University, should essentially meet a uniform format emphasizing readability, concordance with ethical standards and University-wide homogeneity.
+ 
+CHAPTER 1 REPORT LAYOUT
+
+The thesis has to be organized in the following order.
+1.	Cover Page
+2.	Inside Title Page
+3.	Certificate signed by the Supervisor(s) (in the stipulated format)
+4.	Declaration signed by the Candidate (in the stipulated format)
+5.	Acknowledgements
+6.	Abstract
+7.	Table of Contents
+8.	List of Figures
+9.	List of Tables
+10.	Abbreviations/ Notations/ Nomenclature (if any)
+11.	Text of the Report Chapter 1
+Chapter 2
+…..
+…..
+12.	References
+13.	Appendices (if any)
+14.	Non-paper materials (if any)
+
+
+The formats to be followed for various headings are as follows
+1.	COVER PAGE: See sample sheet 1. The content, relative font size and locations of various items in the page should match with those given in sample sheet 1. All copies to be submitted to the various offices at IIST should be soft bound with white cardboard and black rexin in spine.
+2.	INSIDE TITLE PAGE: Same as that of cover page except but printed in bond paper as given in 2.3.
+ 
+3.	CERTIFICATE: See sample sheet 2. The content, relative font size and locations of various items in the page should match with those given in sample sheet 2.
+4.	DECLARATION: See sample sheet 3. The content, relative font size and locations of various items in the page should match with those given in sample sheet 3.
+5.	ACKNOWLEDGEMENTS: See sample sheet 4. Should not exceed two pages.
+6.	ABSTRACT: See sample sheet 5.
+7.	TABLE OF CONTENTS: See sample sheet 6.
+8.	LIST OF FIGURES: See sample sheet 7.
+9.	LIST OF TABLES: See sample sheet 8
+10.	ABBREVIATIONS/	NOTATIONS/	NOMENCLATURE:
+See sample sheet 9.
+11.	CHAPTERS: The chapters may have Introduction including literatures referred, Materials, Methods used, Results, Discussions and Conclusions. See sample sheet 10.
+12.	REFERENCES: To be provided immediately after the last chapter. See sample sheet 11.
+13.	APPENDICES: See sample sheet 12.
+14.	NON-PAPER MATERIALS (if any)
+Each of the items - Inside cover page, Certificate, Acknowledgements, Abstract, Table of Contents, List of Figures, List of Tables, Abbreviations, Notations, Nomenclature, each new Chapter, References and each new Appendix should start on an odd page i.e., on the right side.
+ 
+CHAPTER 2 GENERAL GUIDELINES
+
+2.1.	Report Size
+Report may contain maximum of about 100 pages including references and appendices.
+
+2.2.	Paper Size
+Use A4 size paper (210 mm wide and 297 mm long).
+
+
+2.3.	Paper Quality
+White bond paper weighing 85 g/m2 or more should be used. Essentially the same quality of paper should be used throughout. Photographs or images with dense colors may be printed in single side on glossy paper.
+
+2.4.	Margins
+A margin of 35 mm is to be provided on left and right sides, whereas top and bottom margins should be 30 mm. No print matter should appear in the margin except the page numbers. All page numbers should be centered inside the bottom margin, 20mm from the bottom edge of the paper.
+
+2.5.	Font
+Times New Roman (TNR) 12 point font has to be used throughout the running text. The captions for tables and figures should have font size of 11 and foot notes should be set at font size 10. Font sizes for various levels of headings are given in section 2.7.
+ 
+
+
+2.6.	Line Spacing
+The line spacing in the main text should be 1.5. Single line spacing should be given for quotations, abstract, figure captions, table captions, figure legends, footnotes, and references. The equations, tables, figures, and quotations should be set off from the main text both before and after with spacing of 1.5. Two consecutive paragraphs should be separated by triple line spacing.
+
+2.7.	Headings
+Following format has to be followed in heading of chapters and sections.
+
+ 
+Running text should be set in 12-point TNR and fully justified. First line of paragraph should have indentation of 15 mm.
+
+2.8.	Table / Figure/equation Format
+Tables, figures and equations shall be numbered chapter-wise. For example, second figure in Chapter 3 will be numbered Figure 3.2. The figure can be cited in the text as Fig. 3.2 or Figure 3.2, however consistent citation format should be followed throughout the thesis. Tables shall be numbered similarly (Table 2 in Chapter 3 will be numbered Table 3.2) and shall be cited in the text as Table 3.2. Figure caption shall be located below the figure. Table number and caption shall be located above the table. Equations are aligned to the centre of the page with equation number in the text has to be given at the end of the line within brackets as given below.
+ 
+∞
+𝑓(𝑥) = 𝑎0 + ∑	(𝑎𝑛 cos
+𝑛=1
+ 
+𝑛𝜋𝑥
+𝐿
+ 
++ 𝑏𝑛 sin
+ 
+𝑛𝜋𝑥 )
+𝐿
+ 
+(eq. 2.1)
+ 
+
+
+2.9.	Citing References
+2.9.1.	One author
+Monika (2007) developed this method of ……… Subsequently other researchers have adopted this technique (Ramakrishna, 2009; Bhaskar, 2010).
+
+2.9.2.	Two authors
+Monika and Ram (2008) developed the model of	Subsequently
+other researchers adopted this technique (Ramakrishna, 2009; Rao and Ram, 2011)
+
+2.9.3.	Multiple authors & more than one publication in a year
+“Ram et al. (2005a) has designed the model …..” when given in sentence.
+ 
+“Model AAB could regulate the control unit more efficiently (Ram et al., 2005b) ….” while given in brackets
+
+2.9.4.	Citing multiple references
+When many authors are cited in sentence it is given as “	Similar
+work was also proposed by Singh and Robin (2008); Ram et al. (2009); Prakash (2011)	”
+
+“Similar work was demonstrated for varied data set by many researchers (Singh and Robin, 2008; Ram et al., 2009; Prakash, 2011) ”
+
+2.10.	Listing of the References
+References are to be listed after last chapter. They are to be listed in alphabetical order and numbered. Within a reference the line spacing should be single. Each reference should be separated by one blank line. The reference number should be left aligned. The text of the reference should have an indentation of 10 mm. The reference format to be followed for journal articles, text books, conference proceedings etc. are given below.
+
+2.10.1.	Journals
+1.	Prakas, K. (2011). Feedback and optimal sensitivity: Model reference transformations, multiplicative seminorms, and approximate inverses. IEEE Transactions on Automatic Control, 26(2): 301–320.
+
+2.	Ram, R., Krishna, S. and Peter, K. (2005a). Risk sensitive estimation and a differential game. IEEE Transactions on Automatic Control, 39(9): 1914– 1918.
+
+3.	Ram, R., Krishna, S. and Peter, K. (2005b). Differential rectification using control points. IEEE Transactions on Geoscience and Remote sensing, 55: 914 – 918.
+
+4.	Ram, R., Krishnamurthy, P., Prasad, N. and Peter, K. (2009). Risk sensitive estimation model II.    IEEE Transactions on Automatic Control, 43(15): 355 - 363.
+ 
+2.10.2.	Text books
+1.	Myers, D. G. (2007). Psychology (1st Canadian ed.). Worth: New York.
+
+2.	Robin, R. (2008). Robust Statistics. Wiley-Interscience: New York.
+
+2.10.3.	Conference proceedings
+1.	Payne, D.B. and Gunhold, H.G. (1986). Digital sundials and broadband technology, In Proc. IOOC-ECOC, 1986, pp. 557-998.
+
+2.	Singh, K. and Robin, R. (2008). A linear- quadratic game approach to estimation and smoothing. In American Control Conference, New York. June 20 – 25, 2008, pp. 2818–2822.
+
+2.10.4.	Reports
+1.   Milton, M and Robert, L. (2004). Atmospheric carbon emission through genetic algorithm, Environment and Technical Report No.3., Indian Meteorological Department., New Delhi.
+
+2.10.5.	Online journals with a DOI (Digital Object Identifier)
+1. Krebs, D.L. and Denton, K. (2006). Explanatory limitations of cognitive- developmental approaches to morality. Psychological Review, 113(3): 672- 675. doi: 10.1037/0033-295X.113.3.672
+
+2.10.6.	Online journals without a DOI
+1. Vicki, G.T., Thomae, M., Cullen, A. and Fernandez, H. (2007). Modeling the hydrological impact on Tropical Forests. Forest Ecology, 13(10): 122-132. Retrieved from http://www.uiowa.edu/~grpproc/crisp/crisp.html
+
+2.10.7.	Online abstracts
+1. Perilloux, C. and Buss, D.M. (2008). Human relationships: Costs experienced and coping strategies deployed. Evolutionary Psychology, 6(1): 164-181. Abstract retrieved from http://www.epjournal.net
+
+2.10.8.	Online books
+1. Perfect, T.J. and Schwartz, B. L. (Eds.) (2002). Applied metacognition. Retrieved from http://www.questia.com/read/107598848 (--If DOI is available, use the DOI instead of a URL)
+ 
+2.10.9.	Chapters from a book
+1. Krebs, D.L. and Denton, K. (1997). Social illusions and self deception: The evolution of biases in person perception. In J. A. Simpson & D. T. Kenrick (Eds.), Evolutionary social psychology (pp.21-48). Hillsdale, NJ: Erlbaum.
+
+2.10.10.	Books in print form
+1. Snyder, C.R., Higgins, R.L. and Stucky, R.J. (Eds.). (1983). Excuses: Masquerades in search of grace. New York, NY: John Wiley & Sons.
+
+2.10.11.	Dissertations and Thesis
+1. Mack, S. (2000). “Desperate Optimism” M.S. Thesis, University of Calgary, Canada.
+
+2.11.	Page Numbering
+Page numbers for the prefacing materials (Inside title page, dedication, certificate, declaration, acknowledgements, abstract, table of contents, etc.) of the thesis shall be in small Roman numerals and should be centered at the bottom of the pages. The numbering of the prefacing material starts from the Inside Title Page. However, the number is not printed on the Inside Title Page. Each new item of the prefacing materials listed above should start on a fresh paper on right page. If the content of the prefacing material exceeds one page, it has to be printed on both sides of the paper by starting from the right side page. For example, if the item „Table of Contents‟ extends for 5 pages, it should be printed in fresh paper on right side page with second page of the „Table of Contents‟ on the back of the paper and then continued. The page numbers of the prefacing material will be printed in small Roman numerals continuously counting blank pages also. However, the numbers are not printed on the blank pages.
+The body of the thesis starting from Chapter 1 should be paginated in Arabic numerals and should be centered at the bottom of the pages. The pagination should start with the first page of Chapter 1 and should continue throughout rest of the thesis. Each side of a sheet of paper should be counted as a separate page, even if the back side of a sheet of paper is blank. The odd- numbered pages are always on the right and even-numbered pages are always on
+ 
+the left. If the end of a chapter is in odd page (right side page) the next chapter should start on odd page i.e., on a fresh paper, and should be numbered as odd only by counting the blank even page also. However, the page number is not printed on the blank pages.
+
+2.12.	Printing
+Printing of all material in general should be double –sided in black ink with exceptions as indicated in sections 2.3 and 2.11.
+
+2.13.	Non-Paper Material
+A report may contain non-paper material, such as CDs and DVDs, if necessary. They have to be accommodated in a closed pocket in the back cover page of the thesis. The inclusion of non-paper materials must be indicated in the Table of Contents. All non-paper materials must have a label each clearly indicating the name of the candidate, student code number and the date of submission.
+
+2.14.	Binding
+Thesis copies to be submitted for evaluation are to be soft bounded. The cover page should be printed on glossy white card of 300 g/m2 or above.
+
+2.15.	Electronic Copy
+An electronic version of the report should be submitted to the Head of the Department and the concerned faculty incharge of Internship-Project Planning and Coordination Committee (IPCC). The file name should contain student code number, name of the candidate and date of submission. 
+
+TITLE OF THE PROJECT REPORT TO BE SUBMITTED BY THE CANDIDATE
+A Report submitted
+in partial fulfillment for the Degree of
+
+
+B. Tech in
+Computer Science and Engineering with Specialization in Cyber Security
+by
+NAME OF THE CANDIDATE(S)
+pursued in
+
+Department of Computer Science and Engineering
+
+The Neotia University, West Bengal
+To
+ 
+THE NEOTIA UNIVERSITY, WEST BENGAL
+MONTH, YEAR
+ 
+
+
+CERTIFICATE
+
+
+
+This is to certify that the project report entitled <Title of the project> submitted by <Name of the candidate> to the Department of Computer Science and Engineering, The Neotia University, in partial fulfillment for the award of the degree of B. Tech in (Computer Science and Engineering with Specialization in Cyber Security) is a bona fide record of project work carried out by him/her under my/our supervision. The contents of this report, in full or in parts, have not been submitted to any other Institution or University for the award of any degree or diploma.
+
+
+
+<Signature>	<Signature>
+
+
+<Name of the supervisor>	<Name of the co-supervisor> Supervisor		Co-Supervisor
+Department of CSE	Department of CSE
+
+
+
+
+
+24, Parganas South, West Bengal		Counter signature of HOD with seal
+<Month, year>
+ 
+
+DECLARATION
+
+
+
+I declare that this project report titled <Title of the report> submitted in partial fulfillment of the degree of B. Tech in (Computer Science and Engineering with Specialization in Cyber Security) is a record of original work carried out by me under the supervision of <Name(s) of the Supervisor(s)>, and has not formed the basis for the award of any other degree or diploma, in this or any other Institution or University. In keeping with the ethical practice in reporting scientific information, due acknowledgements have been made wherever the findings of others have been cited.
+
+
+
+<Signature>
+
+<Name of the candidate>
+<Student code number (SC01..)>
+
+24 Parganas (S), West Bengal - 743368
+
+<Date> 
+ACKNOWLEDGMENTS
+
+All acknowledgements to be included here. Please restrict to two pages.
+The name of the candidate shall appear at the end, without signature.
+
+I take this opportunity to thank Prof. Partha Mukherjee, Dean - SST, Dr.
+Shahnawaz Ansari, HoD –Cyber Security, and other faculty members who helped in preparing the report.
+
+I extend my sincere thanks to one and all of TNU family for the completion of  this document on the project report.
+
+
+<Name of the Candidate>
+ 
+
+ABSTRACT
+
+Abstract of the report to be given here. Please restrict to a maximum of 300 words. NOTE: The abstract should not have any citations, or abbreviations, nor should it be divided into sections. It can be divided into adequate number of paragraphs as the author wishes. It is advisable to avoid any equations in the Abstract. Figures and tables are to be avoided.
+Note that all paragraphs in the Abstract start with an indent of 15 mm, and there is no extra spacing between two successive paragraphs. The text should be Times New Roman font size 12, single spaced.
+ 
+
+TABLE OF CONTENTS
+
+
+DESCRIPTION	PAGE NUMBER
+
+CERTIFICATE	iii
+DECLARATION	v
+ACKNOWLEDGEMENTS	vii
+ABSTRACT	ix
+LIST OF FIGURES	xiii
+LIST OF TABLES	xv
+ABBREVIATIONS/ NOTATIONS/ NOMENCLATURE	xvii
+1.	TITLE OF CHAPTER 1	1
+1.1	Section heading name	1
+1.2	Section heading name	1
+1.2.1	Second level section heading	3
+1.3	Section heading name	4
+1.4	Section heading name	5
+1.4.1	Second level section heading	8
+1.4.2	Second level section heading	11
+1.4.2.1  Third level section heading	20
+2.	TITLE OF CHAPTER 2	23
+2.1	Section heading name	23
+2.2	Section heading name	24
+2.2.1	Second level section heading	25
+2.3	Section heading name	26
+2.4	Section heading name	28
+2.4.1	Second level section heading	30
+2.4.2	Second level section heading	35
+
+
+ 
+3.	TITLE OF CHAPTER 3	41
+3.1	Section heading name	41
+Sample sheet 6
+3.2	Section heading name	44
+3.3	Section heading name	50
+3.4	Section heading name	52
+3.4.1	Second level section heading	59
+3.4.2	Second level section heading	65
+3.4.2.1	Third level section heading	70
+4.	TITLE OF CHAPTER 4	75
+4.1	Section heading name	75
+4.2	Section heading name	79
+4.2.1	Second level section heading	89
+4.3	Section heading name	93
+4.4	Section heading name	101
+4.4.1	Second level section heading	126
+4.4.2	Second level section heading	150
+4.4.2.1	Third level section heading	190
+5.	TITLE OF CHAPTER 5	207
+5.1	Section heading name	211
+5.2	Section heading name	290
+5.3	Section heading name	311
+5.3.1	Second level section heading	329
+5.3.2	Second level section heading	330
+5.3.2.1	Third level section heading	340
+REFERENCES	349
+Appendix 1	Title of the appendix 1	361
+Appendix 2	Title of the appendix 2	369
+ 
+Non-paper material
+
+1.	CD [Label]	back cover of the report
+2.	CD [Label]	“
+ 
+	
+
+LIST OF FIGURES	
+
+FIGURE	
+TITLE	
+PAGE NUMBER
+1.1.	Schematic diagram showing the proposed mechanism	5
+1.2.	Next figure alpha	9
+2.1.	Next figure beta	35
+2.2.	Next figure gamma	39
+3.1.	Next figure alpha, alpha	46
+4.1.	Plot of concentration vs time	120
+5.1.	Next figure beta, beta	310
+ 
+
+	
+
+LIST OF TABLES	
+
+TABLE	
+TITLE	
+PAGE NUMBER
+1.1.	Percentage composition of fuel components	11
+1.2.	Name of Table delta	12
+2.1.	Name of Table gradient	35
+4.2.	Name of Table alpha	100
+5.1.	Kinetic parameters calculated for the system	310
+ 
+
+ABBREVIATIONS/ NOTATIONS/ NOMENCLATURE
+
+
+Utmost care should be taken by the project student while using technical abbreviations, notations and nomenclature.
+
+The abbreviations should be listed in alphabetical order as shown below.
+
+
+AFM	Atomic Force Microscopy
+
+BBB	Blood Brain Barrier
+
+CNT	Carbon Nanotube
+
+
+The meaning of special symbols and notations used in the report should be explained.
+
+|x| - absolute value of x μ - mean
+logn(x) - logarithm (x) to the base n
+
+Chemical nomenclature
+
+NH4+	- ammonium
+CH4	- methane
+
+OH-	- hydroxide
+
+SO42-	- sulphate
+
+
+Biological nomenclature
+
+Soneratia apetalla	- saline tolerant species
+
+Oryza sativa	- common rice 
+
+CHAPTER 1 INTRODUCTION
+
+1.1.	Green house gases
+
+The green houses gases are receiving so much of attention these days from the scientific community. The careful management of these gases is a serious research problem. Recently, Attanas and Monica (2012) reported the hazards associated with the mismanagement of these gases. Table 1.1 lists the percentage distribution of the gases.
+The studies related to the management of these systems need to follow a unified approach as suggested by earlier workers (Ram et al., 2005a; Ram et al., 2005b). However reports from Gurudeep and Mahin (2009) indicate the permissible level of green house gases1.
+
+Table 1.1 Title of the table (Times New Roman 11)
+
+
+Aa	Bb	C	D
+			
+			
+			
+a A is admonishment coefficient of total population (Times New Roman 10)
+
+b B is Bombardment coefficient of the mean population (Times New Roman 10)
+
+
+1.1.1	Motivation of the study
+Alarming rate of climate change, sea level rise and other natural disasters are to be managed efficiently. Assessment and management of green house gases thus become very much essential..
+
+
+
+1 Adapted from Monika and Ram, 2008 (Times New Roman 10)
+ 
+Sample sheet 11
+
+
+
+The satellite image as given in Figure 1.1 shows the area from where samples are collected.
+
+Figure 1.1 Title of the figure (Times New Roman 11)
+ 
+
+
+
+
+REFERENCES
+1.	Attanas, D.B. and Monica, H.G. (2012). Effects of green house gases, In Proc. IOOC-ECOC, pp. 557-998.
+
+2.	Gurudeep, P.R. and Mahin, P. (2009). Risk sensitive estimation model II.
+IEEE Transactions on Automatic Control, 43 (15): 355 - 363.
+
+3.	Prakas, K. (2011). Feedback and optimal sensitivity: Model reference transformations, multiplicative seminorms, and approximate inverses. IEEE Transactions on Automatic Control, 26(2): 301–320
+
+4.	Ram, R., Krishna, S. and Peter, K. (2005a). Risk sensitive estimation and a differential game.   IEEE Transactions on Automatic Control, 39(9): 1914– 1918.
+
+5.	Ram, R., Krishna, S and Peter, K. (2005b). Differential rectification using control points. IEEE Transactions on Geoscience and Remote sensing, 55: 914
+– 918.
+
+6.	Singh, K. and Robin, R. (2008). A linear- quadratic game approach to estimation and smoothing. In American Control Conference, New York. June 20 – 25, 2008, pp. 2818–2822.
+ 
+
+APPENDIX 1
+
+LIST OF RESPONDENTS TO THE SURVEY
+
+
+

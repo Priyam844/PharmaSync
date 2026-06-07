@@ -4,9 +4,17 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Inventory from './pages/Inventory';
 import Billing from './pages/Billing';
+import Purchases from './pages/Purchases';
+import Suppliers from './pages/Suppliers';
+import Customers from './pages/Customers';
+import SalesHistory from './pages/SalesHistory';
+import ExpiryAlerts from './pages/ExpiryAlerts';
+import Returns from './pages/Returns';
+import Analytics from './pages/Analytics';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -20,43 +28,27 @@ const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };
 
-// Placeholder components for other pages
-const ExpiryAlerts = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900">Expiry Notifications</h1>
-    <p className="text-gray-500">Monitor medicines near their expiry date.</p>
-  </div>
-);
-
-const Returns = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900">Return Management</h1>
-    <p className="text-gray-500">Handle returns and credit notes.</p>
-  </div>
-);
-
-const Analytics = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900">Advanced Analytics</h1>
-    <p className="text-gray-500">Deep dive into your pharmacy performance.</p>
-  </div>
-);
-
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
-          <Route path="/inventory" element={<PrivateRoute><Layout><Inventory /></Layout></PrivateRoute>} />
-          <Route path="/billing" element={<PrivateRoute><Layout><Billing /></Layout></PrivateRoute>} />
-          <Route path="/expiry" element={<PrivateRoute><Layout><ExpiryAlerts /></Layout></PrivateRoute>} />
-          <Route path="/returns" element={<PrivateRoute><Layout><Returns /></Layout></PrivateRoute>} />
-          <Route path="/analytics" element={<PrivateRoute><Layout><Analytics /></Layout></PrivateRoute>} />
-        </Routes>
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
+            <Route path="/inventory" element={<PrivateRoute><Layout><Inventory /></Layout></PrivateRoute>} />
+            <Route path="/billing" element={<PrivateRoute><Layout><Billing /></Layout></PrivateRoute>} />
+            <Route path="/sales-history" element={<PrivateRoute><Layout><SalesHistory /></Layout></PrivateRoute>} />
+            <Route path="/purchases" element={<PrivateRoute><Layout><Purchases /></Layout></PrivateRoute>} />
+            <Route path="/suppliers" element={<PrivateRoute><Layout><Suppliers /></Layout></PrivateRoute>} />
+            <Route path="/customers" element={<PrivateRoute><Layout><Customers /></Layout></PrivateRoute>} />
+            <Route path="/expiry" element={<PrivateRoute><Layout><ExpiryAlerts /></Layout></PrivateRoute>} />
+            <Route path="/returns" element={<PrivateRoute><Layout><Returns /></Layout></PrivateRoute>} />
+            <Route path="/analytics" element={<PrivateRoute><Layout><Analytics /></Layout></PrivateRoute>} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

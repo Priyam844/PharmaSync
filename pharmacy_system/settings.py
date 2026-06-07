@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(ukj+31eu1a*+#=7qjj^5*gb^6%h_p1*0_#+2odt5lff96m70+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,10 +91,7 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'pharmacy_system.urls'
 

@@ -1,0 +1,45 @@
+# PharmaSync: Local Pharmacy Inventory Management System - Project Summary
+
+## Current Status: Fully Functional Comprehensive Management System
+The project has evolved from an MVP into a feature-rich pharmacy retail and inventory solution. It utilizes a Django REST Framework (DRF) backend and a React 19 (TypeScript) frontend to provide real-time, data-driven management.
+
+## Core Features (Implemented)
+
+### 1. Smart Inventory & Batch Tracking
+- **Multi-Batch Architecture:** Tracks medicines with batch-level granularity (Mfg Date, Expiry Date, Storage Condition, Unique MRP).
+- **Automated Stock Aggregation:** Real-time visibility into total stock across all active batches.
+- **Supplier Linkage:** Direct association between batches and their procurement source.
+
+### 2. Intelligent Billing & FIFO Sales
+- **FIFO (First-In, First-Out) Deduction:** Automatic logic that picks the earliest expiring stock first to minimize waste.
+- **Live Cart System:** Modern billing interface with real-time GST calculation and instant inventory reconciliation.
+- **Smart Search:** High-performance search by brand name or generic composition.
+
+### 3. "Smart-Match" Alternative Suggestion Engine
+- **Ingredient-Based Matching:** Instantly finds available substitutes based on the 'Generic Name'.
+- **Category Fallback:** Automatically suggests similar items in the same category if no exact chemical match is found.
+- **Availability Filter:** Only suggests alternatives that are currently in stock and not expired.
+
+### 4. Advanced Expiry & Return Management
+- **Multi-Tier Alerts:** Color-coded notifications for 'Critical' (30 days) and 'Warning' (90 days) expiries.
+- **Custom Time Filters:** Manual selection for custom expiry period checks.
+- **Dual-Stream Returns:** Separate, dedicated workflows for Customer Returns (Stock-In) and Supplier Returns (Stock-Out).
+
+### 5. Customer & Supplier 360 Profiles
+- **Purchase Timelines:** Detailed history of every medicine bought by a customer or supplied by a distributor.
+- **Period Filtering:** Ability to audit transaction history within specific date ranges.
+- **Re-Add Stock Shortcut:** One-click navigation to PROCUREMENT from any supplier profile.
+
+### 6. Data-Driven Analytics
+- **Visual Insights:** Dynamic charts for Sales Trends, Fast-Moving Items, and Category Distribution.
+- **Dead Stock Alert:** Algorithmic identification of stock with zero sales in the last 60 days.
+
+## Technical Stack
+- **Backend:** Django 5.0, DRF, PostgreSQL, JWT (SimpleJWT).
+- **Frontend:** React 19, Vite, TypeScript, Tailwind CSS 4.0.
+- **Visualization:** Recharts, Lucide-React.
+
+## Development Standards
+- **Surgical Edits:** Precision code updates using local project memory.
+- **Audit Logging:** Every critical stock adjustment is logged in the backend.
+- **Data Integrity:** Strict relational constraints ensure zero-stock or negative-sale prevention.

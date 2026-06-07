@@ -25,7 +25,7 @@ const Register = () => {
     setError(null);
 
     try {
-      await axios.post('http://127.0.0.1:8001/api/auth/registration/', {
+      await axios.post(`http://${window.location.hostname}:8000/api/auth/registration/`, {
         username: formData.username,
         email: formData.email,
         password1: formData.password,
