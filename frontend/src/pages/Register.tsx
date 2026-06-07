@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Pill, Loader2, AlertCircle } from 'lucide-react';
+import { Pill, Loader2, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
+import './Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Register = () => {
     password: '',
     confirm_password: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
   const navigate = useNavigate();
@@ -41,90 +44,110 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4">
+    <div id="auth-page-root" className="register-page-container">
+      <div className="register-card">
+        <div className="register-header">
+          <div className="register-logo">
             <Pill size={28} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 text-center">Create Account</h1>
-          <p className="text-gray-500 mt-1">Join PharmaSync to manage your inventory</p>
+          <h1 className="register-title">Create Account</h1>
+          <p className="register-subtitle">Join PharmaSync to manage your inventory</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-rose-50 border border-rose-100 rounded-xl flex items-center gap-3 text-rose-700 text-sm">
+          <div className="register-error">
             <AlertCircle size={18} />
             <div>
               {typeof error === 'string' ? error : (
                 error.detail || 
                 (error.username && `Username: ${error.username[0]}`) || 
                 (error.email && `Email: ${error.email[0]}`) || 
-                (error.password1 && `Password: ${error.password1[0]}`) ||
-                (error.password2 && `Confirm Password: ${error.password2[0]}`) ||
-                (error.non_field_errors && error.non_field_errors[0]) ||
+                (error.password1 && `Password: ${error.password1[0]}`) || 
+                (error.password2 && `Confirm Password: ${error.password2[0]}`) || 
+                (error.non_field_errors && error.non_field_errors[0]) || 
                 'Registration error'
               )}
             </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Username</label>
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="form-group">
+            <label className="form-label">Username</label>
             <input
               type="text"
               required
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-gray-900"
+              className="form-input"
               placeholder="Pick a username"
               value={formData.username}
               onChange={(e) => setFormData({...formData, username: e.target.value})}
             />
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Email (Optional)</label>
+          <div className="form-group">
+            <label className="form-label">Email (Optional)</label>
             <input
               type="email"
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-gray-900"
+              className="form-input"
               placeholder="Enter email"
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
             />
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Password</label>
-            <input
-              type="password"
-              required
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-gray-900"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-            />
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <div className="form-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                className="form-input"
+                style={{ paddingRight: '3rem' }}
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Confirm Password</label>
-            <input
-              type="password"
-              required
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-gray-900"
-              placeholder="••••••••"
-              value={formData.confirm_password}
-              onChange={(e) => setFormData({...formData, confirm_password: e.target.value})}
-            />
+          <div className="form-group">
+            <label className="form-label">Confirm Password</label>
+            <div className="form-input-container">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                required
+                className="form-input"
+                style={{ paddingRight: '3rem' }}
+                placeholder="••••••••"
+                value={formData.confirm_password}
+                onChange={(e) => setFormData({...formData, confirm_password: e.target.value})}
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 mt-4"
+            className="submit-button"
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : 'Register'}
           </button>
         </form>
 
-        <p className="mt-8 text-center text-gray-600 text-sm">
+        <p className="register-footer">
           Already have an account?{' '}
-          <Link to="/login" className="text-indigo-600 font-bold hover:underline">
+          <Link to="/login" className="login-link">
             Log in
           </Link>
         </p>
