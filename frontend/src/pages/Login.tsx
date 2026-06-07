@@ -22,11 +22,42 @@ const Login = () => {
         username,
         password,
       });
-      const { access, refresh, user } = res.data;
-      login(access, refresh, user);
+      
+      const { access, refresh, access_token, refresh_token, user } = res.data;
+      
+      const accessToken = access || access_token;
+      const refreshToken = refresh || refresh_token;
+      
+      if (!accessToken) {
+        throw new Error('Login failed: No access token received from server');
+      }
+
+      // If user object is missing in login response, we might need to fetch it
+      let finalUser = user;
+      if (!finalUser) {
+        try {
+          const userRes = await axios.get(`http://${window.location.hostname}:8000/api/auth/user/`, {
+            headers: { Authorization: `Bearer ${accessToken}` }
+          });
+          finalUser = userRes.data;
+        } catch (uErr) {
+          console.warn('Could not fetch user profile after login', uErr);
+          finalUser = { username }; // Fallback
+        }
+      }
+
+      login(accessToken, refreshToken || '', finalUser);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.non_field_errors?.[0] || 'Invalid credentials');
+      console.error('Login Error:', err);
+      const data = err.response?.data;
+      const message = 
+        data?.non_field_errors?.[0] || 
+        data?.detail || 
+        data?.error || 
+        (typeof data === 'string' ? data : null) ||
+        'Invalid credentials or server error';
+      setError(message);
     } finally {
       setLoading(false);
     }

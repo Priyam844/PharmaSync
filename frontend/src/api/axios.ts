@@ -25,15 +25,22 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshToken = localStorage.getItem('refresh_token');
+        if (!refreshToken) throw new Error('No refresh token');
+
         const res = await axios.post(`http://${window.location.hostname}:8000/api/auth/token/refresh/`, {
           refresh: refreshToken,
         });
-        localStorage.setItem('access_token', res.data.access);
-        originalRequest.headers.Authorization = `Bearer ${res.data.access}`;
+        
+        const newAccessToken = res.data.access || res.data.access_token;
+        if (!newAccessToken) throw new Error('No new access token received');
+
+        localStorage.setItem('access_token', newAccessToken);
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (err) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user');
         window.location.href = '/login';
       }
     }

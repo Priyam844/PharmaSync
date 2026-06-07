@@ -1,0 +1,418 @@
+A SYNOPSIS ON 
+SMART PHARMACY INVENTORY AND EXPIRY 
+MANAGEMENT SYSTEM 
+Submitted in partial fulfillment of the requirement for the award of the degree of 
+BACHELOR 
+IN 
+COMPUTER APPLICATION (BCA) 
+Submitted by: 
+Soumalya Bagchi 
+Priyam Halder 
+Ankit Gore 
+Dipankar Pramanik 
+Sukanta Mandal 
+Under the Guidance of 
+TNU2023069100024 
+TNU2023069100009 
+TNU2023069100003 
+TNU2023069100051 
+TNU2023069100046 
+Prof. Sandipan Chakravorty 
+Designation 
+Department of Computer Science and Engineering 
+The Neotia University 
+Diamond Harbour Road, Sarisha, 24 Parganas (s), Kolkata, 
+West Bengal 743368 
+April-2026 
+CANDIDATE’S DECLARATION 
+I hereby certify that the work which is being presented in the Synopsis entitled “Smart 
+Pharmacy Inventory & Expiry Management System” in partial fulfillment of the 
+requirements for the award of the Degree of Bachelor of Computer Application (BCA) in 
+the Department of Computer Science and Engineering of The Neotia University, 
+Kolkata shall be carried out by the undersigned under the supervision of Prof. 
+Sandipan Chakravorty, Assistant Professor, Department of Computer Science and 
+Engineering, The Neotia University, Kolkata. 
+Soumalya Bagchi 
+Priyam Halder 
+Ankit Gore 
+Dipankar Pramanik 
+Sukanta Mandal 
+TNU2023069100024 
+TNU2023069100009 
+TNU2023069100003 
+TNU2023069100051 
+TNU2023069100046 
+The above mentioned students shall be working under the supervision of the 
+undersigned on the “SMART PHARMACY INVENTORY & EXPIRY MANAGEMENT 
+Signature 
+Supervisor 
+SYSTEM” 
+Internal Evaluation (By DPRC Committee) 
+Status of the Synopsis: Accepted / Rejected 
+Any Comments: 
+Name of the Committee Members: 
+Signature 
+Head of the Department 
+Signature with Date 
+1. 
+2. 
+Table of Contents 
+Chapter No. 
+Chapter 1 
+Chapter 2 
+Chapter 3 
+Chapter 4 
+Chapter 5 
+Description 
+Introduction and Problem Statement               
+Background/ Literature Survey  
+Objectives  
+Hardware and Software Requirements  
+Possible Approach/ Algorithms  
+References  
+Page No. 
+Chapter 1 
+Introduction and Problem Statement 
+1.1 Introduction 
+In recent years, the healthcare and pharmaceutical sectors have witnessed significant 
+growth, leading to an increased demand for efficient inventory management systems in 
+local pharmacy stores. Despite this growth, many small and medium-sized pharmacies 
+still rely on manual or semi-digital methods to manage their medicine inventory. These 
+traditional methods are often inefficient, error-prone, and lack real-time monitoring 
+capabilities. 
+Medicines are sensitive products with defined expiry dates and batch numbers, making 
+their management more complex compared to general retail items. Improper handling 
+of inventory can lead to issues such as stockouts, overstocking, and financial losses due 
+to expired medicines. Additionally, the absence of intelligent systems results in poor 
+tracking of near-expiry products and missed opportunities for timely returns to 
+distributors. 
+Modern technologies such as barcode scanning, Optical Character Recognition (OCR), 
+and data analytics provide an opportunity to transform traditional pharmacy 
+management systems into smart, automated platforms. By integrating these 
+technologies, pharmacies can improve operational efficiency, reduce wastage, and 
+enhance decision-making. 
+This project proposes the development of a Smart Pharmacy Inventory & Expiry 
+Management System that integrates inventory tracking, billing, expiry alerts, return 
+management, and analytics into a unified system tailored for local pharmacy stores. 
+1.2 Problem Statement 
+Local pharmacy stores face significant challenges in managing medicine inventory due 
+to reliance on manual or basic digital systems. These challenges include: 
+ 
+ 
+ 
+ 
+ 
+ 
+Inefficient tracking of medicine stock and batch details 
+Lack of timely identification of near-expiry medicines 
+Financial losses due to missed return deadlines 
+Absence of intelligent decision-making tools for stock optimization 
+Errors in manual data entry and stock updates 
+No analytical insights into sales trends and inventory performance 
+Therefore, there is a need for an intelligent, automated system that can efficiently 
+manage pharmacy inventory, minimize losses due to expiry, and support data-driven 
+decision-making. 
+Chapter 2 
+Background/ Literature Survey 
+1. Importance of Inventory Management in Pharmacy Sector 
+Inventory management plays a crucial role in the pharmaceutical industry due to 
+the time-sensitive and regulated nature of medicines. Proper stock handling 
+ensures availability of essential drugs while minimizing losses due to expiry and 
+overstocking. 
+2. Limitations of Traditional Pharmacy Systems 
+Most local pharmacy stores still rely on manual registers or basic billing 
+software. These systems are limited to transaction recording and lack advanced 
+features such as batch tracking, expiry monitoring, and intelligent stock 
+management. 
+3. Challenges in Handling Expiry-Sensitive Products 
+Medicines have fixed expiry dates, making their management more complex than 
+general retail items. Inefficient tracking often leads to expired stock, financial 
+loss, and potential health risks if not handled properly. 
+4. Need for Batch-wise Inventory Tracking 
+Research highlights the importance of batch-level tracking in pharmaceutical 
+inventory systems. Batch tracking allows precise monitoring of expiry dates, 
+return eligibility, and stock movement, which is often missing in small-scale 
+systems. 
+5. Use of Barcode Technology in Inventory Systems 
+Barcode scanning has been widely adopted to improve data accuracy and speed 
+in inventory entry. It reduces human errors and enables quick identification of 
+medicines. However, not all medicines in local stores have barcodes, limiting its 
+effectiveness. 
+6. Application of Optical Character Recognition (OCR) 
+Recent advancements in OCR technology allow automatic extraction of text from 
+medicine packaging. This helps in identifying medicine names, batch numbers, 
+and expiry dates, providing a useful alternative where barcode scanning is not 
+feasible. 
+7. Role of Database Management Systems 
+Modern inventory systems use relational databases such as MySQL or 
+PostgreSQL to store and manage large volumes of data efficiently. These systems 
+ensure data consistency, quick retrieval, and better organization of inventory 
+records. 
+8. Use of Analytics in Inventory Optimization 
+Advanced systems incorporate data analytics to identify fast-moving and slow- 
+moving medicines. This helps in optimizing stock levels, reducing dead stock, 
+and improving overall operational efficiency. 
+9. Gap in Existing Systems for Local Pharmacies 
+Most advanced pharmacy management systems are designed for large chains 
+and hospitals. They are often expensive and complex, making them unsuitable 
+for small local pharmacy stores that require simple yet effective solutions. 
+10. Need for an Integrated Smart System 
+There is a clear need for a cost-effective, user-friendly system that integrates 
+inventory management, expiry tracking, return optimization, and analytics. Such 
+a system can significantly improve efficiency and reduce wastage in local 
+pharmacy operations. 
+Chapter 3 
+Objectives 
+The main objectives of the proposed Smart Pharmacy Inventory & Expiry Management 
+System are as follows: 
+1. To develop an efficient batch-wise inventory management system 
+The system aims to maintain a structured database of medicines with detailed 
+batch-level information such as batch number, expiry date, quantity, and MRP. 
+This will enable accurate tracking of stock and ensure proper implementation of 
+First-In-First-Out (FIFO) methodology for better inventory control. 
+2. To implement a smart and flexible inventory entry mechanism 
+The system will support multiple methods for adding medicines, including 
+barcode scanning, Optical Character Recognition (OCR)-based image processing, 
+and manual entry with auto-suggestions. This ensures ease of use and 
+accommodates medicines that do not have barcodes. 
+3. To design an automated near-expiry detection and alert system 
+The objective is to continuously monitor medicine expiry dates and generate 
+timely alerts categorized into warning and critical levels. This will help 
+pharmacists take proactive actions such as prioritizing sales or initiating returns 
+to reduce wastage. 
+4. To develop an integrated billing and sales management system 
+The system will generate digital bills and automatically update inventory in real 
+time during each transaction. It will also maintain sales records, ensuring 
+accuracy and reducing manual errors in stock deduction. 
+5. To implement an efficient return management system 
+The system will identify medicines eligible for return based on expiry timelines 
+and generate return lists automatically. It will also track return status and credit 
+notes, helping pharmacies minimize financial losses due to expired stock. 
+6. To provide an analytics dashboard for data-driven decision making 
+The system will analyse sales and inventory data to identify fast-moving and 
+slow-moving medicines, detect dead stock, and evaluate financial performance. 
+This will assist pharmacy owners in making informed decisions regarding stock 
+management and purchasing. 
+Chapter 4 
+Hardware and Software Requirements 
+Hardware Requirements 
+ 
+ 
+ 
+ 
+Computer system with minimum 4GB RAM 
+Barcode scanner (optional) 
+Smartphone camera (for OCR scanning) 
+Storage device 
+Software Requirements 
+ 
+ 
+ 
+ 
+ 
+Operating System: Windows / Linux 
+Programming Language: Java / Python / JavaScript 
+Database: MySQL / PostgreSQL 
+Frameworks: Web or Mobile development frameworks 
+Tools: OCR libraries, barcode scanning libraries 
+Chapter 5 
+Possible Approach/ Algorithms 
+(2 to 4 pages) 
+Proposed Approach 
+5.1 Proposed Approach 
+The proposed system follows a modular and systematic approach to manage pharmacy 
+inventory efficiently. The system integrates multiple functional components that work 
+together with a centralized database to ensure accuracy, automation, and real-time 
+updates. 
+The overall workflow of the system is divided into the following stages: 
+Step 1: Inventory Entry 
+The first step involves adding medicines into the system. The system supports 
+multiple input methods to ensure flexibility and usability in real-world scenarios. 
+ 
+ 
+ 
+ 
+Medicines can be added using barcode scanning for quick identification. 
+For medicines without barcodes, Optical Character Recognition (OCR) can 
+extract information from packaging. 
+Manual entry with auto-suggestions is also provided to minimize typing effort 
+and errors. 
+Each entry stores detailed batch information including batch number, expiry 
+date, quantity, and price. 
+This hybrid approach ensures that the system is adaptable to different types of 
+pharmacy environments. 
+Step 2: Inventory Management 
+Once medicines are added, the system maintains a structured database of all inventory 
+records. 
+ 
+ 
+ 
+ 
+Medicines are tracked batch-wise rather than as a single quantity. 
+Each batch is associated with its expiry date and quantity. 
+The system ensures proper organization of stock using First-In-First-Out (FIFO) 
+principles. 
+Storage conditions such as normal or refrigerated can also be managed. 
+This approach improves accuracy in tracking and reduces the chances of expiry-related 
+losses. 
+Step 3: Billing and Sales Management 
+The billing module handles customer transactions and ensures automatic updates in 
+inventory. 
+ 
+ 
+ 
+ 
+Bills are generated digitally for each sale. 
+When a medicine is sold, the system automatically deducts the quantity from the 
+corresponding batch. 
+FIFO logic is applied to ensure that medicines with earlier expiry dates are sold 
+first. 
+Sales records are stored for future analysis. 
+This eliminates manual errors and ensures consistency between sales and inventory. 
+Step 4: Near-Expiry Detection 
+The system continuously monitors the expiry dates of all medicines in the inventory. 
+ 
+ 
+ 
+The current date is compared with the expiry date of each batch. 
+Medicines are categorized based on remaining shelf life: 
+o Critical: Expiring within 30 days 
+o Warning: Expiring within 90 days 
+Alerts are generated and displayed to the user. 
+This helps pharmacists take timely actions and prevent stock wastage. 
+Step 5: Return Management 
+The return management module is designed to minimize losses by identifying 
+medicines eligible for return. 
+ 
+ 
+ 
+ 
+The system checks if a batch falls within the return window (typically 3–6 
+months before expiry). 
+Eligible medicines are automatically added to a return list. 
+The system tracks the status of returns such as pending or completed. 
+Credit notes or replacements from distributors can also be recorded. 
+This ensures efficient handling of near-expiry stock. 
+Step 6: Analytics Dashboard 
+The analytics module provides insights based on collected data. 
+ 
+ 
+ 
+Sales data is analyzed to identify fast-moving and slow-moving medicines. 
+Inventory data is used to detect dead stock and near-expiry items. 
+Financial analysis helps track revenue and losses due to expiry. 
+ 
+Visual representations such as charts and summaries improve decision-making. 
+This enables pharmacy owners to make data-driven decisions. 
+5.2 Algorithms Used 
+5.2.1 FIFO-Based Stock Handling Algorithm 
+The FIFO algorithm ensures that medicines with the earliest expiry dates are sold first, 
+reducing wastage. 
+Steps: 
+1. Retrieve all batches of a medicine. 
+2. Sort batches in ascending order of expiry date. 
+3. Select the batch with the earliest expiry. 
+4. Deduct the required quantity from that batch. 
+5. If the quantity is insufficient, move to the next batch. 
+6. Repeat until the required quantity is fulfilled. Pseudo Code: 
+Input: Medicine_ID, Quantity_Required 
+Fetch all batches of the medicine 
+Sort batches by Expiry_Date (ascending) 
+For each batch: 
+If batch_quantity >= Quantity_Required: 
+batch_quantity -= Quantity_Required 
+break 
+Else: 
+Quantity_Required -= batch_quantity 
+batch_quantity = 0 
+Update inventory 
+5.2.2 Near-Expiry Detection Algorithm 
+This algorithm identifies medicines approaching expiry. 
+Steps: 
+1. Get the current system date. 
+2. For each batch, calculate remaining days. 
+3. Classify based on threshold values. 
+Pseudo Code: 
+For each batch: 
+days_left = Expiry_Date - Current_Date 
+If days_left <= 30: 
+status = "Critical" 
+Else if days_left <= 90: 
+status = "Warning" 
+Else: 
+status = "Safe" 
+5.2.3 Return Eligibility Algorithm 
+This algorithm determines whether a medicine is eligible for return. 
+Steps: 
+1. Define return window (e.g., 90–180 days before expiry). 
+2. Calculate remaining days for each batch. 
+3. Mark eligible batches. 
+Pseudo Code: 
+For each batch: 
+days_left = Expiry_Date - Current_Date 
+If days_left >= 90 AND days_left <= 180: 
+mark as "Return Eligible" 
+5.2.4 Sales Trend Analysis Algorithm 
+This algorithm categorizes medicines based on demand. 
+Steps: 
+1. Calculate total sales for each medicine. 
+2. Compare with predefined thresholds. 
+3. Classify accordingly. 
+Pseudo Code: 
+For each medicine: 
+sales_count = total units sold 
+If sales_count > threshold_high: 
+category = "Fast Moving" 
+Else: 
+category = "Slow Moving" 
+5.2.5 Dead Stock Detection Algorithm 
+This algorithm identifies inventory that is not being sold. 
+Steps: 
+1. Track last sale date for each medicine. 
+2. Calculate inactivity period. 
+3. Mark as dead stock if no sale within a threshold (e.g., 60 days). 
+5.3 Advantages of the Proposed Approach 
+ 
+ 
+ 
+ 
+ 
+Reduces losses due to expired medicines 
+Improves inventory accuracy and efficiency 
+Automates routine tasks such as billing and tracking 
+Supports better decision-making through analytics 
+Provides a scalable solution for local pharmacy stores 
+Flow chart: 
+References 
+Journal Papers 
+[1] N. K. Kanhere and S. T. Birchfield, “Real-time incremental segmentation and tracking 
+of vehicles at low camera angles using stable features,” IEEE Transactions on Intelligent 
+Transportation Systems, vol. 9, no. 1, pp. 148–160, 2008. 
+[2] S. Axsäter, “Inventory control theory: A review,” International Journal of Production 
+Economics, vol. 93–94, pp. 1–12, 2005. 
+[3] A. Rossetti and S. Achlerkar, “Inventory management issues in healthcare systems,” 
+International Journal of Logistics Systems and Management, vol. 10, no. 3, pp. 305–320, 
+2011. 
+[4] P. DeHoratius and A. Raman, “Inventory record inaccuracy: An empirical analysis,” 
+Management Science, vol. 54, no. 4, pp. 627–641, 2008. 
+Conference Papers 
+[5] K. Onoguchi, “Moving object detection using a cross correlation between a short 
+accumulated histogram and a long accumulated histogram,” Proceedings of the 
+International Conference on Pattern Recognition, 2006. 
+[6] M. Li, Z. Zhang, and Y. Chen, “Automated inventory management using barcode and 
+RFID technologies,” International Conference on Information Management, 2018. 
+Books 
+[7] T. H. Cormen, C. E. Leiserson, R. L. Rivest, and C. Stein, Introduction to Algorithms, 
+2nd ed., MIT Press, 2001. 
+[8] R. S. Pressman, Software Engineering: A Practitioner’s Approach, 7th ed., McGraw- 
+Hill, 2010. 
+[9] K. Laudon and J. Laudon, Management Information Systems, 15th ed., Pearson, 2018. 
+Web Resources 
+[10] Open Source Computer Vision Library (OpenCV), “OCR and Image Processing 
+Documentation.” [Online]. Available: http://opencv.org 
+[11] World Health Organization (WHO), “Guidelines on good pharmacy practice.” 
+[Online]. Available: https://www.who.int 
+[12] MySQL Documentation, “Database Management System Guide.” [Online]. Available: 
+https://dev.mysql.com 
+[13] Google ML Kit, “Text Recognition (OCR) API.” [Online]. Available: 
+https://developers.google.com/ml-kit 

@@ -1,0 +1,71 @@
+# PHARMASYNC: SMART PHARMACY INVENTORY & EXPIRY MANAGEMENT SYSTEM
+# PRESENTATION STRUCTURE (Strictly following Exam Guidelines)
+
+## Slide 1: Title Slide
+- **Project Title:** PharmaSync: Smart Pharmacy Inventory & Expiry Management System
+- **Team Members:** Soumalya Bagchi, Priyam Halder, Ankit Gore, Dipankar Pramanik, Sukanta Mandal
+- **Supervisor:** Prof. Sandipan Chakravorty
+- **Institution:** The Neotia University (BCA Program)
+
+---
+
+## Slide 2: 1. Problem Statement
+- **Manual Dependency:** Reliance on physical registers leads to high error rates and labor-intensive tracking.
+- **Stock Wastage:** Lack of automated expiry monitoring results in significant financial losses due to expired medicines.
+- **Data Entry Errors:** Inaccurate records of batch numbers and MRPs cause billing discrepancies.
+- **Return Deadlines:** Pharmacists often miss distributor return windows due to lack of pre-expiry alerts.
+- **Stock Optimization:** No data-driven way to identify dead stock or fast-moving items.
+
+---
+
+## Slide 3: 2. Literature Survey
+- **Inventory Theory:** Efficient stock handling is critical for time-sensitive pharmaceutical products (Axsäter, 2005).
+- **Inaccuracy Impact:** Record inaccuracy in retail pharmacy leads to customer dissatisfaction and stockouts (DeHoratius, 2008).
+- **Automation Benefits:** Barcode and OCR technologies are proven to reduce human error in medicinal data entry.
+- **Relational Databases:** SQL-based systems ensure data integrity and quick retrieval for complex batch-medicine relationships.
+
+---
+
+## Slide 4: 3. Research Gap
+- **Cost vs. Complexity:** Existing enterprise solutions are either too expensive for local pharmacies or too complex to operate without IT staff.
+- **Niche Focus:** Most generic POS systems lack specific pharmaceutical features like 'Batch-wise FIFO' or 'Ingredient-based Matching'.
+- **Return Management:** Significant lack of automated "Return-Eligibility" flagging in small-scale systems.
+- **Hybrid Entry:** Most systems force either 100% Barcode or 100% Manual; PharmaSync fills this gap with a hybrid OCR/Barcode/Manual approach.
+
+---
+
+## Slide 5: 4. Objective of Research
+1. **Batch Tracking:** Implement granular monitoring of Mfg/Exp dates at the batch level.
+2. **Flexible Entry:** Design a hybrid mechanism (OCR, Barcode, Auto-suggest) for stock entry.
+3. **Automated Alerts:** Create a multi-tier notification system for near-expiry products.
+4. **FIFO Sales:** Integrate a First-In-First-Out stock deduction logic for sales.
+5. **Return Efficiency:** Automate the identification of return-eligible batches.
+6. **Analytics:** Provide a visual dashboard for data-driven decision making.
+
+---
+
+## Slide 6: 5. Methodology (Objective Wise)
+- **Obj 1 (Batching):** Relational Schema Design linking `Medicine` to `Batch` with unique expiry constraints.
+- **Obj 2 (Hybrid Entry):** Integration of OCR libraries and Barcode logic with a fallback auto-suggestion engine.
+- **Obj 3 (Alerts):** Date-difference algorithm categorized by threshold (30/90 days) with color-coded UI indicators.
+- **Obj 4 (FIFO):** Backend logic that sorts batches by `expiry_date` (ASC) during checkout to ensure oldest stock sells first.
+- **Obj 5 (Returns):** Algorithm-based flagging of batches within the 90-180 day pre-expiry window.
+- **Obj 6 (Analytics):** Real-time data aggregation using Django ORM and visualization with Recharts.
+
+---
+
+## Slide 7: 6. Result Discussion
+- **Zero Inaccuracy:** Successfully prevented negative stock and duplicate batch-mismatch errors.
+- **Waste Reduction:** Automated FIFO logic significantly minimizes the risk of stock expiring on shelves.
+- **Operational Speed:** Billing time reduced through smart search and automatic stock deduction.
+- **User Interface:** Implemented a responsive, dark-mode-enabled UI that ensures usability in low-light pharmacy environments.
+- **Data Export:** Functional CSV reporting allows pharmacists to perform offline audits and detailed analysis.
+
+---
+
+## Slide 8: 7. Reference
+- Cormen, T. H. et al. (2001). *Introduction to Algorithms*. MIT Press.
+- Pressman, R. S. (2010). *Software Engineering: A Practitioner’s Approach*. McGraw-Hill.
+- World Health Organization (WHO). *Guidelines on Good Pharmacy Practice*.
+- Django & React Documentation (2026).
+- Axsäter, S. (2005). *Inventory Control Theory*. International Journal of Production Economics.

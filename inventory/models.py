@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import timedelta
 
 class Supplier(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suppliers', null=True)
     name = models.CharField(max_length=200)
     contact_person = models.CharField(max_length=200, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
@@ -16,6 +17,7 @@ class Supplier(models.Model):
         return self.name
 
 class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customers', null=True)
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=20, unique=True)
     email = models.EmailField(blank=True, null=True)
@@ -26,6 +28,7 @@ class Customer(models.Model):
         return f"{self.name} ({self.phone})"
 
 class Medicine(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='medicines', null=True)
     name = models.CharField(max_length=200)
     generic_name = models.CharField(max_length=200, blank=True, null=True)
     manufacturer = models.CharField(max_length=200, blank=True, null=True)
@@ -43,6 +46,7 @@ class Batch(models.Model):
         ('REFRIGERATED', 'Refrigerated'),
     ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='batches', null=True)
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='batches')
     batch_number = models.CharField(max_length=100)
     manufacturing_date = models.DateField(blank=True, null=True)
@@ -82,6 +86,7 @@ class Batch(models.Model):
         ordering = ['expiry_date']
 
 class Purchase(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='purchases', null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, related_name='purchases')
     purchase_date = models.DateTimeField(default=timezone.now)
     reference_no = models.CharField(max_length=100, blank=True, null=True)
@@ -110,6 +115,7 @@ class Sale(models.Model):
         ('CANCELLED', 'Cancelled'),
         ('RETURNED', 'Returned'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sales', null=True)
     invoice_number = models.CharField(max_length=20, unique=True, blank=True, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')
     sale_date = models.DateTimeField(auto_now_add=True)
@@ -156,6 +162,7 @@ class ReturnRecord(models.Model):
         ('PENDING', 'Pending'),
         ('COMPLETED', 'Completed'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='returns', null=True)
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
     return_type = models.CharField(max_length=20, choices=RETURN_TYPES, default='SALES_RETURN')
     quantity = models.PositiveIntegerField()

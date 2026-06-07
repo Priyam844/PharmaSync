@@ -1,0 +1,78 @@
+# PROJECT REPORT: PHARMASYNC
+## SMART PHARMACY INVENTORY & EXPIRY MANAGEMENT SYSTEM
+**Date:** June 7, 2026
+**Status:** Project Fully Completed
+
+---
+
+### ABSTRACT
+PharmaSync is a localized, intelligent inventory management solution designed to optimize pharmacy operations. The system addresses the critical challenges of medicinal stock management, including batch-wise tracking, expiry-sensitive waste reduction, and real-time tax-compliant billing. Built using Django (Backend) and React 19 (Frontend), PharmaSync implements advanced algorithms such as First-In-First-Out (FIFO) stock deduction and automated multi-tier expiry alerts. The system ensures data integrity, reduces manual error, and provides actionable analytics for stock optimization.
+
+---
+
+### 1. PROBLEM STATEMENT
+Manual management in local pharmacies leads to:
+1. Significant financial loss due to expired stock.
+2. Inefficient tracking of batch numbers and unique MRPs.
+3. Errors in GST calculations and manual billing.
+4. Difficulty in finding alternative medicines (substitutes) when stock is low.
+5. Inability to analyze sales trends for better procurement.
+
+---
+
+### 2. LITERATURE SURVEY
+Research shows that medicinal products require a specialized inventory approach due to their legal and safety constraints (expiry dates, batch numbers). Standard retail POS systems often fail to provide the granularity needed for pharmaceutical returns and batch-wise FIFO. Research into OCR and Barcode integration highlights the potential for near-zero error rates in medicinal data entry.
+
+---
+
+### 3. RESEARCH GAP
+PharmaSync addresses the gap between expensive, complex enterprise hospital systems and basic billing software. It provides a unique "Smart-Match" substitute engine and automated return-eligibility flagging—features typically missing in small-scale local solutions.
+
+---
+
+### 4. OBJECTIVES
+- To track inventory at a granular batch level.
+- To implement automated expiry monitoring and alerting.
+- To ensure oldest stock is sold first via FIFO logic.
+- To provide professional tax-invoicing and customer history tracking.
+- To visualize stock health and sales performance through analytics.
+
+---
+
+### 5. METHODOLOGY (OBJECTIVE-WISE)
+- **Objective 1 (Batch Tracking):** Developed a relational database model in PostgreSQL where each `Medicine` is linked to multiple `Batch` entries. This allows the system to store unique dates and prices for the same product.
+- **Objective 2 (Hybrid Entry):** Implemented a flexible inventory form that supports manual input, auto-suggestions, and is architected to support OCR and Barcode scanning.
+- **Objective 3 (Expiry Alerts):** Created a date-difference algorithm that runs in real-time, categorizing stock into 'Critical' (<30 days), 'Warning' (<90 days), and 'Safe' levels.
+- **Objective 4 (FIFO Billing):** Developed a backend logic in Django that automatically sorts and deducts quantity from the earliest expiring batch during a sale transaction.
+- **Objective 5 (Return Management):** Created a dedicated logic to flag batches that are within the distributor return window (90-180 days before expiry).
+- **Objective 6 (Analytics):** Integrated Recharts in the frontend to visualize sales trends, fast-moving items, and dead stock identified via Django aggregation queries.
+
+---
+
+### 6. RESULT DISCUSSION
+- **Functional Validation:** The system successfully prevents negative stock and ensures that only valid, non-expired batches are available for sale.
+- **Data Consistency:** Implemented strict batch validation that prevents adding inconsistent data (e.g., same batch number but different expiry dates).
+- **Operational Efficiency:** Billing process is now instant, with automated GST calculation and inventory reconciliation.
+- **User Experience:** The system features a modern "Glassmorphism" UI with dark-mode support, ensuring a professional and responsive experience across devices.
+- **Reporting:** Successfully implemented a CSV export feature for detailed analytics reports, enabling offline auditing and management analysis.
+
+---
+
+### 7. TECHNICAL STACK
+- **Backend:** Django 5.0, Django REST Framework, PostgreSQL.
+- **Frontend:** React 19 (TypeScript), Vite, Tailwind CSS 4.0.
+- **Security:** JWT Authentication, Strict Relational Constraints.
+- **Design:** Lucide-React Icons, Recharts (Data Visualization).
+
+---
+
+### 8. CONCLUSION
+PharmaSync has evolved into a robust, professional-grade pharmacy management tool. It successfully automates the critical lifecycle of medicinal products, from procurement and batch-tracking to smart billing and analytics, significantly reducing the risks and inefficiencies of manual pharmacy management.
+
+---
+
+### 9. REFERENCES
+- Cormen, T. H., et al. (2001). Introduction to Algorithms.
+- Django Project Documentation (2026).
+- React 19 Official Documentation (2026).
+- WHO Good Pharmacy Practice Guidelines.

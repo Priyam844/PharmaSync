@@ -8,11 +8,13 @@ class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
         fields = '__all__'
+        read_only_fields = ['user']
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
+        read_only_fields = ['user']
 
 class BatchSerializer(serializers.ModelSerializer):
     days_to_expiry = serializers.ReadOnlyField()
@@ -23,7 +25,8 @@ class BatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Batch
         fields = '__all__'
-
+        read_only_fields = ['user']
+...
 class MedicineSerializer(serializers.ModelSerializer):
     batches = BatchSerializer(many=True, read_only=True)
     total_stock = serializers.SerializerMethodField()
@@ -36,6 +39,7 @@ class MedicineSerializer(serializers.ModelSerializer):
             'description', 'gst_percentage', 'created_at', 'batches',
             'total_stock', 'latest_mrp'
         ]
+        read_only_fields = ['user']
 
     def get_total_stock(self, obj):
         return sum(b.quantity for b in obj.batches.all())
@@ -58,6 +62,7 @@ class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
         fields = '__all__'
+        read_only_fields = ['user']
 
 class SaleItemSerializer(serializers.ModelSerializer):
     medicine_name = serializers.ReadOnlyField(source='batch.medicine.name')
@@ -74,6 +79,7 @@ class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = '__all__'
+        read_only_fields = ['user']
 
 class ReturnRecordSerializer(serializers.ModelSerializer):
     medicine_name = serializers.ReadOnlyField(source='batch.medicine.name')
@@ -82,6 +88,7 @@ class ReturnRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReturnRecord
         fields = '__all__'
+        read_only_fields = ['user']
 
 class AuditLogSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')

@@ -18,7 +18,14 @@ from .serializers import (
 def log_action(user, action, details=""):
     AuditLog.objects.create(user=user, action=action, details=details)
 
-class SupplierViewSet(viewsets.ModelViewSet):
+class UserFilteredViewSetMixin:
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class SupplierViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
 
@@ -28,7 +35,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
         start_date = request.query_params.get('start_date')
         end_date = request.query_params.get('end_date')
         
-        purchases = Purchase.objects.filter(supplier=supplier).order_by('-purchase_date')
+        purchases = Purchase.objects.filter(user=request.user, supplier=supplier).order_by('-purchase_date')
         
         if start_date:
             purchases = purchases.filter(purchase_date__date__gte=start_date)
@@ -38,7 +45,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
         serializer = PurchaseSerializer(purchases, many=True)
         return Response(serializer.data)
 
-class CustomerViewSet(viewsets.ModelViewSet):
+class CustomerViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
@@ -48,7 +55,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         start_date = request.query_params.get('start_date')
         end_date = request.query_params.get('end_date')
         
-        sales = Sale.objects.filter(customer=customer, status='COMPLETED').order_by('-sale_date')
+        sales = Sale.objects.filter(user=request.user, customer=customer, status='COMPLETED').order_by('-sale_date')
         
         if start_date:
             sales = sales.filter(sale_date__date__gte=start_date)
@@ -58,7 +65,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         serializer = SaleSerializer(sales, many=True)
         return Response(serializer.data)
 
-class MedicineViewSet(viewsets.ModelViewSet):
+class MedicineViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Medicine.objects.all()
     serializer_class = MedicineSerializer
 
@@ -67,15 +74,18 @@ class MedicineViewSet(viewsets.ModelViewSet):
         medicine = self.get_object()
         
         # 1. Try matching by generic_name
-        alternatives = Medicine.objects.none()
+        alternatives = Medicine.objects.filter(user=request.user)
         if medicine.generic_name:
-            alternatives = Medicine.objects.filter(
+            alternatives = alternatives.filter(
                 generic_name__iexact=medicine.generic_name
             ).exclude(id=medicine.id)
+        else:
+            alternatives = Medicine.objects.none()
 
         # 2. If no generic match or if we want more, fallback/add by category
         if not alternatives.exists() and medicine.category:
             alternatives = Medicine.objects.filter(
+                user=request.user,
                 category__iexact=medicine.category
             ).exclude(id=medicine.id)
 
@@ -122,11 +132,13 @@ class MedicineViewSet(viewsets.ModelViewSet):
             except (ValueError, TypeError):
                 return Response({"error": "Invalid GST percentage format"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Get or Create Medicine
+        # Get or Create Medicine (Scoped to User)
         medicine, created = Medicine.objects.get_or_create(
             name__iexact=name,
+            user=request.user,
             defaults={
                 'name': name,
+                'user': request.user,
                 'generic_name': data.get('generic_name'),
                 'manufacturer': data.get('manufacturer'),
                 'category': data.get('category'),
@@ -149,8 +161,8 @@ class MedicineViewSet(viewsets.ModelViewSet):
             medicine.description = data.get('description') or medicine.description
             medicine.save()
 
-        # Check for existing batch consistency
-        existing_batch = Batch.objects.filter(medicine=medicine, batch_number=batch_number).first()
+        # Check for existing batch consistency (Scoped to User)
+        existing_batch = Batch.objects.filter(medicine=medicine, batch_number=batch_number, user=request.user).first()
         if existing_batch:
             # Compare details
             mismatches = []
@@ -174,6 +186,7 @@ class MedicineViewSet(viewsets.ModelViewSet):
             # Create new batch
             Batch.objects.create(
                 medicine=medicine,
+                user=request.user,
                 batch_number=batch_number,
                 manufacturing_date=manufacturing_date if manufacturing_date else None,
                 expiry_date=expiry_date if expiry_date else (timezone.now().date() + timezone.timedelta(days=365)),
@@ -196,7 +209,7 @@ class MedicineViewSet(viewsets.ModelViewSet):
         manufacturing_date = data.pop('manufacturing_date', None)
         expiry_date = data.pop('expiry_date', None)
         partial = kwargs.pop('partial', False)
-        instance = self.get_object()
+        instance = self.get_object() # Uses filtered queryset
         
         # Validation for MRP and Stock if provided
         try:
@@ -213,8 +226,8 @@ class MedicineViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         medicine = serializer.save()
 
-        # Handle Price and Stock Manual Updates
-        latest_batch = medicine.batches.order_by('-added_date').first()
+        # Handle Price and Stock Manual Updates (Scoped to User)
+        latest_batch = medicine.batches.filter(user=request.user).order_by('-added_date').first()
         
         if latest_batch:
             if initial_mrp is not None and initial_mrp != '':
@@ -222,7 +235,7 @@ class MedicineViewSet(viewsets.ModelViewSet):
             
             if initial_stock is not None and initial_stock != '':
                 new_stock = int(initial_stock)
-                current_total = sum(b.quantity for b in medicine.batches.all())
+                current_total = sum(b.quantity for b in medicine.batches.filter(user=request.user))
                 difference = new_stock - current_total
                 latest_batch.quantity = max(0, latest_batch.quantity + difference)
             
@@ -237,7 +250,7 @@ class MedicineViewSet(viewsets.ModelViewSet):
         
         return Response(serializer.data)
 
-class BatchViewSet(viewsets.ModelViewSet):
+class BatchViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
 
@@ -245,11 +258,11 @@ class BatchViewSet(viewsets.ModelViewSet):
     def near_expiry(self, request):
         days_limit = int(request.query_params.get('days', 90))
         limit_date = timezone.now().date() + timezone.timedelta(days=days_limit)
-        batches = Batch.objects.filter(expiry_date__lte=limit_date, quantity__gt=0)
+        batches = Batch.objects.filter(user=request.user, expiry_date__lte=limit_date, quantity__gt=0)
         serializer = self.get_serializer(batches, many=True)
         return Response(serializer.data)
 
-class PurchaseViewSet(viewsets.ModelViewSet):
+class PurchaseViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
 
@@ -262,6 +275,7 @@ class PurchaseViewSet(viewsets.ModelViewSet):
             return Response({"error": "No items provided"}, status=status.HTTP_400_BAD_REQUEST)
 
         purchase = Purchase.objects.create(
+            user=request.user,
             supplier_id=supplier_id,
             reference_no=request.data.get('reference_no', ''),
             purchase_date=request.data.get('purchase_date', timezone.now())
@@ -288,11 +302,13 @@ class PurchaseViewSet(viewsets.ModelViewSet):
                 mrp=mrp
             )
 
-            # Create or Update Batch
+            # Create or Update Batch (Scoped to User)
             batch, created = Batch.objects.get_or_create(
                 medicine_id=medicine_id,
                 batch_number=batch_number,
+                user=request.user,
                 defaults={
+                    'user': request.user,
                     'manufacturing_date': manufacturing_date,
                     'expiry_date': expiry_date,
                     'quantity': quantity,
@@ -318,7 +334,7 @@ class PurchaseViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(purchase)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class SaleViewSet(viewsets.ModelViewSet):
+class SaleViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
 
@@ -330,7 +346,7 @@ class SaleViewSet(viewsets.ModelViewSet):
         if not items_data:
             return Response({"error": "No items provided"}, status=status.HTTP_400_BAD_REQUEST)
 
-        sale = Sale.objects.create(customer_id=customer_id)
+        sale = Sale.objects.create(user=request.user, customer_id=customer_id)
         total_amount = 0
         tax_amount = 0
 
@@ -339,12 +355,13 @@ class SaleViewSet(viewsets.ModelViewSet):
             requested_qty = int(item.get('quantity'))
             specified_batch_id = item.get('batch_id')
             
-            medicine = Medicine.objects.get(id=medicine_id)
+            # Scoped to User
+            medicine = Medicine.objects.get(id=medicine_id, user=request.user)
             gst_percentage = medicine.gst_percentage
 
             if specified_batch_id:
                 # Use specific batch
-                batch = Batch.objects.get(id=specified_batch_id, medicine_id=medicine_id)
+                batch = Batch.objects.get(id=specified_batch_id, medicine_id=medicine_id, user=request.user)
                 if batch.quantity < requested_qty:
                     raise ValueError(f"Insufficient stock in batch {batch.batch_number} for {medicine.name}")
                 
@@ -366,8 +383,9 @@ class SaleViewSet(viewsets.ModelViewSet):
                 total_amount += item_total
                 tax_amount += item_tax
             else:
-                # FIFO Deduction
+                # FIFO Deduction (Scoped to User)
                 batches = Batch.objects.filter(
+                    user=request.user,
                     medicine_id=medicine_id, 
                     quantity__gt=0,
                     expiry_date__gt=timezone.now().date()
@@ -417,7 +435,7 @@ class SaleViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     @transaction.atomic
     def return_order(self, request, pk=None):
-        sale = self.get_object()
+        sale = self.get_object() # Uses filtered queryset
         if sale.status == 'RETURNED':
             return Response({"error": "Order is already returned"}, status=status.HTTP_400_BAD_REQUEST)
         if sale.status == 'CANCELLED':
@@ -439,6 +457,7 @@ class SaleViewSet(viewsets.ModelViewSet):
             
             # Also record in ReturnRecord for audit
             ReturnRecord.objects.create(
+                user=request.user,
                 batch=batch,
                 return_type='SALES_RETURN',
                 quantity=item.quantity,
@@ -453,7 +472,7 @@ class SaleViewSet(viewsets.ModelViewSet):
         
         return Response({"message": "Order returned successfully and stock restored"})
 
-class ReturnRecordViewSet(viewsets.ModelViewSet):
+class ReturnRecordViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = ReturnRecord.objects.all()
     serializer_class = ReturnRecordSerializer
 
@@ -463,7 +482,7 @@ class ReturnRecordViewSet(viewsets.ModelViewSet):
         quantity = int(request.data.get('quantity', 0))
         return_type = request.data.get('return_type', 'SALES_RETURN')
         
-        batch = Batch.objects.get(id=batch_id)
+        batch = Batch.objects.get(id=batch_id, user=request.user)
 
         if return_type == 'PURCHASE_RETURN':
             if batch.quantity < quantity:
@@ -485,20 +504,21 @@ class ReturnRecordViewSet(viewsets.ModelViewSet):
         return response
 
 class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = AuditLog.objects.all().order_by('-timestamp')
+    def get_queryset(self):
+        return AuditLog.objects.filter(user=self.request.user).order_by('-timestamp')
     serializer_class = AuditLogSerializer
 
 class AnalyticsViewSet(viewsets.ViewSet):
     def list(self, request):
-        # KPI Analytics
-        total_medicines = Medicine.objects.count()
-        total_stock = Batch.objects.aggregate(total=Sum('quantity'))['total'] or 0
-        total_sales = Sale.objects.filter(status='COMPLETED').aggregate(total=Sum('grand_total'))['total'] or 0
+        # KPI Analytics (Scoped to User)
+        total_medicines = Medicine.objects.filter(user=request.user).count()
+        total_stock = Batch.objects.filter(user=request.user).aggregate(total=Sum('quantity'))['total'] or 0
+        total_sales = Sale.objects.filter(user=request.user, status='COMPLETED').aggregate(total=Sum('grand_total'))['total'] or 0
         
-        # Near Expiry Counts
+        # Near Expiry Counts (Scoped to User)
         today = timezone.now().date()
-        critical = Batch.objects.filter(expiry_date__lte=today + timezone.timedelta(days=30), quantity__gt=0).count()
-        warning = Batch.objects.filter(expiry_date__gt=today + timezone.timedelta(days=30), 
+        critical = Batch.objects.filter(user=request.user, expiry_date__lte=today + timezone.timedelta(days=30), quantity__gt=0).count()
+        warning = Batch.objects.filter(user=request.user, expiry_date__gt=today + timezone.timedelta(days=30), 
                                       expiry_date__lte=today + timezone.timedelta(days=90), 
                                       quantity__gt=0).count()
 
@@ -520,6 +540,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
         for i in range(7):
             date = timezone.now().date() - timezone.timedelta(days=i)
             amount = Sale.objects.filter(
+                user=request.user,
                 sale_date__date=date, 
                 status='COMPLETED'
             ).aggregate(total=Sum('grand_total'))['total'] or 0
@@ -534,21 +555,21 @@ class AnalyticsViewSet(viewsets.ViewSet):
         today = timezone.now()
         last_60_days = today - timezone.timedelta(days=60)
         
-        fast_moving = SaleItem.objects.filter(sale__status='COMPLETED')\
+        fast_moving = SaleItem.objects.filter(sale__user=request.user, sale__status='COMPLETED')\
             .values('batch__medicine__name')\
             .annotate(total_sold=Sum('quantity'), revenue=Sum('total_with_tax'))\
             .order_by('-total_sold')[:10]
             
-        sold_recently = SaleItem.objects.filter(sale__sale_date__gte=last_60_days, sale__status='COMPLETED')\
+        sold_recently = SaleItem.objects.filter(sale__user=request.user, sale__sale_date__gte=last_60_days, sale__status='COMPLETED')\
             .values_list('batch__medicine_id', flat=True).distinct()
         
-        dead_stock = Medicine.objects.filter(batches__quantity__gt=0)\
+        dead_stock = Medicine.objects.filter(user=request.user, batches__quantity__gt=0)\
             .exclude(id__in=sold_recently)\
             .annotate(total_qty=Sum('batches__quantity'))\
             .values('name', 'total_qty', 'manufacturer')[:10]
             
-        # Category distribution
-        category_dist = Medicine.objects.values('category')\
+        # Category distribution (Scoped to User)
+        category_dist = Medicine.objects.filter(user=request.user).values('category')\
             .annotate(count=Count('id'))\
             .order_by('-count')
 
@@ -571,7 +592,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
         # 1. Fast Moving Items
         writer.writerow(['TOP 10 FAST MOVING ITEMS'])
         writer.writerow(['Medicine Name', 'Total Units Sold', 'Total Revenue'])
-        fast_moving = SaleItem.objects.filter(sale__status='COMPLETED')\
+        fast_moving = SaleItem.objects.filter(sale__user=request.user, sale__status='COMPLETED')\
             .values('batch__medicine__name')\
             .annotate(total_sold=Sum('quantity'), revenue=Sum('total_with_tax'))\
             .order_by('-total_sold')[:10]
@@ -585,9 +606,9 @@ class AnalyticsViewSet(viewsets.ViewSet):
         writer.writerow(['Medicine Name', 'Manufacturer', 'Quantity in Stock'])
         today = timezone.now()
         last_60_days = today - timezone.timedelta(days=60)
-        sold_recently = SaleItem.objects.filter(sale__sale_date__gte=last_60_days, sale__status='COMPLETED')\
+        sold_recently = SaleItem.objects.filter(sale__user=request.user, sale__sale_date__gte=last_60_days, sale__status='COMPLETED')\
             .values_list('batch__medicine_id', flat=True).distinct()
-        dead_stock = Medicine.objects.filter(batches__quantity__gt=0)\
+        dead_stock = Medicine.objects.filter(user=request.user, batches__quantity__gt=0)\
             .exclude(id__in=sold_recently)\
             .annotate(total_qty=Sum('batches__quantity'))\
             .values('name', 'total_qty', 'manufacturer')[:20]
@@ -599,7 +620,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
         # 3. Category Distribution
         writer.writerow(['STOCK DISTRIBUTION BY CATEGORY'])
         writer.writerow(['Category', 'Medicine Count'])
-        category_dist = Medicine.objects.values('category')\
+        category_dist = Medicine.objects.filter(user=request.user).values('category')\
             .annotate(count=Count('id'))\
             .order_by('-count')
         for item in category_dist:
