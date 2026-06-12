@@ -7,7 +7,6 @@ import {
   Eye,
   Calendar,
   User,
-  Pill as PillIcon,
   ChevronRight,
   Loader2,
   Clock,
@@ -15,6 +14,7 @@ import {
 } from 'lucide-react';
 import api from '../api/axios';
 import Modal from '../components/Modal';
+import Logo from '../components/Logo';
 
 const SalesHistory = () => {
   const [sales, setSales] = useState<any[]>([]);
@@ -234,8 +234,8 @@ const SalesHistory = () => {
           <div ref={invoiceRef} className="p-8 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl">
             <div className="flex justify-between items-start mb-8">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
-                  <PillIcon size={28} />
+                <div className="w-12 h-12 bg-indigo-700 rounded-xl flex items-center justify-center text-white p-1.5 shadow-sm">
+                  <Logo size={28} />
                 </div>
                 <div>
                   <h2 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">PharmaSync</h2>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Pill, Loader2, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Loader2, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import Logo from '../components/Logo';
 import './Login.css';
 
 const Login = () => {
@@ -70,7 +71,7 @@ const Login = () => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
-            <Pill size={28} />
+            <Logo size={28} />
           </div>
           <h1 className="login-title">Login to PharmaSync</h1>
           <p className="login-subtitle">Enter your credentials to access the system</p>

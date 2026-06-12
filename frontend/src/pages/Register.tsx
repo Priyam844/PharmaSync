@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Pill, Loader2, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Loader2, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
+import Logo from '../components/Logo';
 import './Register.css';
 
 const Register = () => {
@@ -48,7 +49,7 @@ const Register = () => {
       <div className="register-card">
         <div className="register-header">
           <div className="register-logo">
-            <Pill size={28} />
+            <Logo size={28} />
           </div>
           <h1 className="register-title">Create Account</h1>
           <p className="register-subtitle">Join PharmaSync to manage your inventory</p>

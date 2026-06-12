@@ -21,6 +21,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
+import Logo from './Logo';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -57,8 +58,8 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
   <div className="flex flex-col h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
     <div className="p-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-          <Pill size={24} />
+        <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white p-1.5">
+          <Logo className="w-full h-full" />
         </div>
         <span className="font-bold text-xl tracking-tight dark:text-white">PharmaSync</span>
       </div>
@@ -165,8 +166,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {/* Mobile Header */}
         <header className="lg:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-              <Pill size={18} />
+            <div className="w-8 h-8 bg-indigo-700 rounded-lg flex items-center justify-center text-white p-1 shadow-sm">
+              <Logo className="w-full h-full" />
             </div>
             <span className="font-bold text-lg dark:text-white">PharmaSync</span>
           </div>

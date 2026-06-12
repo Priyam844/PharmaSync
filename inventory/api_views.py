@@ -14,6 +14,9 @@ from .serializers import (
     SupplierSerializer, CustomerSerializer, PurchaseSerializer,
     PurchaseItemSerializer, AuditLogSerializer
 )
+from .ocr_utils import extract_info_from_image
+import os
+import tempfile
 
 def log_action(user, action, details=""):
     AuditLog.objects.create(user=user, action=action, details=details)
@@ -68,6 +71,30 @@ class CustomerViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
 class MedicineViewSet(UserFilteredViewSetMixin, viewsets.ModelViewSet):
     queryset = Medicine.objects.all()
     serializer_class = MedicineSerializer
+
+    @action(detail=False, methods=['post'])
+    def ocr_scan(self, request):
+        if 'image' not in request.FILES:
+            return Response({"error": "No image provided"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        image_file = request.FILES['image']
+        
+        # Save image to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.jpg') as tmp:
+            for chunk in image_file.chunks():
+                tmp.write(chunk)
+            tmp_path = tmp.name
+        
+        try:
+            info = extract_info_from_image(tmp_path)
+            if not info:
+                return Response({"error": "Could not extract information from image"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(info)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
 
     @action(detail=True, methods=['get'])
     def alternatives(self, request, pk=None):

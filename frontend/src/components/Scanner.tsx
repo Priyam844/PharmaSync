@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Loader2 } from 'lucide-react';
-import Tesseract from 'tesseract.js';
+import { Upload, Loader2, AlertCircle } from 'lucide-react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import api from '../api/axios';
 
 interface ScannerProps {
   onScanResult: (data: any) => void;
@@ -39,18 +39,20 @@ const Scanner: React.FC<ScannerProps> = ({ onScanResult, mode }) => {
     setLoading(true);
     setError(null);
     
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    
     try {
-      const result = await Tesseract.recognize(
-        e.target.files[0],
-        'eng',
-        { logger: m => console.log(m) }
-      );
+      const res = await api.post('medicines/ocr_scan/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       
-      // Simple heuristic for medicine parsing
-      const text = result.data.text;
-      onScanResult({ rawText: text, source: 'ocr' });
-    } catch (err) {
-      setError("Failed to process image. Please try again.");
+      onScanResult({ ...res.data, source: 'paddleocr' });
+    } catch (err: any) {
+      console.error('OCR Error:', err);
+      setError(err.response?.data?.error || "Failed to process image. Please try again.");
     } finally {
       setLoading(false);
     }

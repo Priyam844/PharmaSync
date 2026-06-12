@@ -195,7 +195,16 @@ const Inventory = () => {
   };
 
   const handleScanResult = (data: any) => {
-    if (data.rawText) {
+    if (data.source === 'paddleocr') {
+      setFormData(prev => ({
+        ...prev,
+        name: data.name || prev.name,
+        generic_name: data.generic_name || prev.generic_name,
+        batch_number: data.batch_number || prev.batch_number,
+        expiry_date: data.expiry_date || prev.expiry_date,
+        initial_mrp: data.mrp || prev.initial_mrp
+      }));
+    } else if (data.rawText) {
       const lines = data.rawText.split('\n');
       if (lines.length > 0) {
         setFormData(prev => ({ ...prev, name: lines[0].trim() }));

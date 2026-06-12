@@ -16,7 +16,7 @@ The project has evolved from an MVP into a feature-rich pharmacy retail and inve
 - **Smart Search:** High-performance search by brand name or generic composition.
 
 ### 3. "Smart-Match" Alternative Suggestion Engine
-- **Ingredient-Based Matching:** Instantly finds available substitutes based on the 'Generic Name'.
+- **Ingredient-Based Mpyatching:** Instantly finds available substitutes based on the 'Generic Name'.
 - **Category Fallback:** Automatically suggests similar items in the same category if no exact chemical match is found.
 - **Availability Filter:** Only suggests alternatives that are currently in stock and not expired.
 
