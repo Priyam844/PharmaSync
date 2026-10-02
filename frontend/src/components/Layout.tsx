@@ -36,7 +36,7 @@ interface SidebarContentProps {
 }
 
 const menuItems = [
-  { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
+  { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { path: '/inventory', icon: Pill, label: 'Inventory' },
   { path: '/billing', icon: ShoppingCart, label: 'Billing' },
   { path: '/sales-history', icon: History, label: 'Sales History' },
@@ -123,7 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   return (

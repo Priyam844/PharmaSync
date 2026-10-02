@@ -50,7 +50,7 @@ const Login = () => {
       }
 
       login(accessToken, refreshToken || '', finalUser);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err: any) {
       console.error('Login Error:', err);
       const data = err.response?.data;

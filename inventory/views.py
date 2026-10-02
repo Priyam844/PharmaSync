@@ -6,6 +6,9 @@ from .models import Medicine, Batch, Sale, SaleItem, ReturnRecord
 from django.contrib import messages
 from django.db import transaction
 
+def landing_page(request):
+    return render(request, 'inventory/landing_page.html')
+
 def dashboard(request):
     today = timezone.now().date()
     

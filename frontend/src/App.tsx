@@ -13,6 +13,7 @@ import Returns from './pages/Returns';
 import Analytics from './pages/Analytics';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Landing from './pages/Landing';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -34,9 +35,10 @@ function App() {
       <ThemeProvider>
         <Router>
           <Routes>
+            <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
+            <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
             <Route path="/inventory" element={<PrivateRoute><Layout><Inventory /></Layout></PrivateRoute>} />
             <Route path="/billing" element={<PrivateRoute><Layout><Billing /></Layout></PrivateRoute>} />
             <Route path="/sales-history" element={<PrivateRoute><Layout><SalesHistory /></Layout></PrivateRoute>} />
